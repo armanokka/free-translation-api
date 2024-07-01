@@ -1,0 +1,6 @@
+.env
+transloapi
+application_default_credentials.json
+postgres-data
+redis-data
+elasticsearch-data

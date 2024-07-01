@@ -1,0 +1,115 @@
+basePath: /api/v1
+definitions:
+  Response:
+    properties:
+      error:
+        type: string
+      ok:
+        type: boolean
+    type: object
+  ResponseTranslation:
+    properties:
+      error:
+        type: string
+      ok:
+        type: boolean
+      text_lang:
+        type: string
+      translated_text:
+        description: string if only one text is translated, array if more
+        items:
+          type: string
+        type: array
+    type: object
+  v1.ResponseDetection:
+    properties:
+      detected_languages:
+        items:
+          type: string
+        type: array
+      error:
+        type: string
+      ok:
+        type: boolean
+    type: object
+host: localhost:80
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: The free Google translation API
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /detect:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: Detect language the text is written in
+      parameters:
+      - description: Text to translate
+        in: formData
+        name: text
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.ResponseDetection'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Response'
+      summary: Detect language the text is written in
+  /translate:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: Translate text and detect its language
+      parameters:
+      - description: Text to translate
+        in: formData
+        name: text
+        required: true
+        type: string
+      - description: Source language
+        in: formData
+        name: from
+        type: string
+      - description: Target language
+        in: formData
+        name: to
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ResponseTranslation'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Response'
+      summary: Translate text
+securityDefinitions:
+  BasicAuth:
+    type: basic
+swagger: "2.0"
