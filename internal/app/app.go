@@ -41,7 +41,7 @@ func Run(cfg *config.Config) error {
 	}
 
 	// Creating tracer
-	shutdownTracerProvider, err := initProvider(ctx, cfg.OTLPGRPCReceiverDSN)
+	shutdownTracerProvider, err := initProvider(ctx, "otel-collector:4317")
 	if err != nil {
 		return err
 	}

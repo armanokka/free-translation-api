@@ -6,9 +6,8 @@ import (
 
 type Config struct {
 	/* Compulsory envs */
-	OTLPGRPCReceiverDSN string `yaml:"OTLP_GRPC_RECEIVER_DSN" env:"OTLP_GRPC_RECEIVER_DSN" env-required:"true"`
-	RedisPassword       string `yaml:"REDIS_PASSWORD" env:"REDIS_PASSWORD" env-required:"true"`
-	RedisPort           int    `yaml:"REDIS_PORT" env:"REDIS_PORT" env-required:"true"`
+	RedisPassword string `yaml:"REDIS_PASSWORD" env:"REDIS_PASSWORD" env-required:"true"`
+	RedisPort     int    `yaml:"REDIS_PORT" env:"REDIS_PORT" env-required:"true"`
 
 	// Optional envs
 	Port           int    `yaml:"PORT" env:"PORT" env-default:"80"`
