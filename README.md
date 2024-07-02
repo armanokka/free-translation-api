@@ -1,7 +1,7 @@
 ## The Free Translation API  written in Golang 🚀
 Documentation is located in `docs` folder
 #### 🔥 Live Example
-Base URL: http://188.225.74.17/api/v1/
+Base URL: http://188.225.74.17/api/v1/ ![](http://188.225.74.17/uptime)
 
 |            |                                         |
 |------------|-----------------------------------------|
