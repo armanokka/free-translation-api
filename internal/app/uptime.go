@@ -25,7 +25,7 @@ var client = &http.Client{
 func UptimeHandler() gin.HandlerFunc {
 	start := time.Now()
 	return func(c *gin.Context) {
-		req, err := http.NewRequestWithContext(c, "GET", fmt.Sprintf("https://img.shields.io/badge/%s-brightgreen", time.Since(start).Truncate(time.Second).String()), nil)
+		req, err := http.NewRequestWithContext(c, "GET", fmt.Sprintf("https://img.shields.io/badge/uptime-%s-brightgreen", time.Since(start).Truncate(time.Second).String()), nil)
 		if err != nil {
 			c.String(400, err.Error())
 			log.Error("", zap.Error(err))

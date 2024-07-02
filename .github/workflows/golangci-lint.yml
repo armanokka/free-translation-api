@@ -5,7 +5,6 @@ on:
       - v*
     branches:
       - master
-      - main
   pull_request:
 permissions:
   contents: read
@@ -32,4 +31,4 @@ jobs:
         # - https://github.com/golangci/golangci-lint-action/issues/442
         run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.47.3
       - name: Run golangci-lint
-        run: golangci-lint run --version --verbose --out-format=github-actions
+        run: golangci-lint run --verbose --out-format=github-actions

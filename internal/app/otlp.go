@@ -34,11 +34,14 @@ func initProvider(ctx context.Context, otelGrpcReceiverDSN string) (func(context
 	// probably connect directly to the service through dns.
 	ctx, cancel := context.WithTimeout(ctx, time.Second)
 	defer cancel()
-	conn, err := grpc.DialContext(ctx, otelGrpcReceiverDSN,
-		// Note the use of insecure transport here. TLS is recommended in production.
+	conn, err := grpc.NewClient(otelGrpcReceiverDSN,
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
-		grpc.WithBlock(),
 	)
+	//conn, err := grpc.DialContext(ctx, otelGrpcReceiverDSN,
+	//	// Note the use of insecure transport here. TLS is recommended in production.
+	//	grpc.WithTransportCredentials(insecure.NewCredentials()),
+	//	grpc.WithBlock(),
+	//)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create gRPC connection to collector: %w", err)
 	}
