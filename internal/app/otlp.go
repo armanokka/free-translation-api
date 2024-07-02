@@ -37,11 +37,6 @@ func initProvider(ctx context.Context, otelGrpcReceiverDSN string) (func(context
 	conn, err := grpc.NewClient(otelGrpcReceiverDSN,
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
-	//conn, err := grpc.DialContext(ctx, otelGrpcReceiverDSN,
-	//	// Note the use of insecure transport here. TLS is recommended in production.
-	//	grpc.WithTransportCredentials(insecure.NewCredentials()),
-	//	grpc.WithBlock(),
-	//)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create gRPC connection to collector: %w", err)
 	}
@@ -55,11 +50,7 @@ func initProvider(ctx context.Context, otelGrpcReceiverDSN string) (func(context
 	// Register the trace exporter with a TracerProvider, using a batch
 	// span processor to aggregate spans before export.
 	bsp := tracesdk.NewBatchSpanProcessor(traceExporter)
-	// Create the Jaeger exporter
-	//exporter, err := jaeger.New(jaeger.WithCollectorEndpoint(jaeger.WithEndpoint(jaegerReceiverDSN)))
-	//if err != nil {
-	//	return nil, err
-	//}
+
 	tracerProvider := tracesdk.NewTracerProvider(
 		//tracesdk.WithBatcher(exporter),
 		tracesdk.WithSampler(tracesdk.AlwaysSample()),
